@@ -8,7 +8,7 @@ class MoveableObject extends DrawableObject {
 
     applyGavity() {
         setInterval(() => {
-            if(this.isAboveGround() || this.speedY > 0) {
+            if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
@@ -16,21 +16,21 @@ class MoveableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if(this instanceof ThrowableObject) {
+        if (this instanceof ThrowableObject) {
             return true;
         } else {
             return this.y < 130;
         }
     }
 
-    isColliding (mo) {
+    isColliding(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height 
-        
-        
-        
+            this.x < mo.x + mo.width &&
+            this.y < mo.y + mo.height
+
+
+
         // (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) && 
         //         (this.y + this.offsetY + this.height) >= obj.y &&
         //         (this.y + this.offsetY) <= (obj.y + obj.height) && 
@@ -40,7 +40,7 @@ class MoveableObject extends DrawableObject {
 
     hit() {
         this.energy -= 5;
-        if(this.energy < 0) {
+        if (this.energy < 0) {
             this.energy = 0;
         } else {
             this.lastHit = new Date().getTime();
@@ -79,5 +79,5 @@ class MoveableObject extends DrawableObject {
         this.speedY = 30;
     }
 
-        
+
 }
